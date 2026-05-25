@@ -1,0 +1,52 @@
+{
+  "version": "53.0.0",
+  "files": {
+    "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200": {
+      "displayName": "SpeechLabStack/Custom::VpcRestrictDefaultSGCustomResourceProvider Code",
+      "source": {
+        "path": "asset.7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200",
+        "packaging": "zip"
+      },
+      "destinations": {
+        "376210053828-us-east-1-d00108b6": {
+          "bucketName": "cdk-hnb659fds-assets-376210053828-us-east-1",
+          "objectKey": "7fa1e366ee8a9ded01fc355f704cff92bfd179574e6f9cfee800a3541df1b200.zip",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::376210053828:role/cdk-hnb659fds-file-publishing-role-376210053828-us-east-1"
+        }
+      }
+    },
+    "74d5f107816b5605a790ee115b3f64d1c99618e5efb9f390b3a252c3fb326673": {
+      "displayName": "SpeechLabStack Template",
+      "source": {
+        "path": "SpeechLabStack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "376210053828-us-east-1-1613e61b": {
+          "bucketName": "cdk-hnb659fds-assets-376210053828-us-east-1",
+          "objectKey": "74d5f107816b5605a790ee115b3f64d1c99618e5efb9f390b3a252c3fb326673.json",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::376210053828:role/cdk-hnb659fds-file-publishing-role-376210053828-us-east-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {
+    "68be11d3a7843d6c089d03542691d0ab4ed0a24092f533d6e9d6c2ce02da68e5": {
+      "displayName": "TaskDef/app/AssetImage",
+      "source": {
+        "directory": "asset.68be11d3a7843d6c089d03542691d0ab4ed0a24092f533d6e9d6c2ce02da68e5",
+        "platform": "linux/arm64"
+      },
+      "destinations": {
+        "376210053828-us-east-1-f35f1e1d": {
+          "repositoryName": "cdk-hnb659fds-container-assets-376210053828-us-east-1",
+          "imageTag": "68be11d3a7843d6c089d03542691d0ab4ed0a24092f533d6e9d6c2ce02da68e5",
+          "region": "us-east-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::376210053828:role/cdk-hnb659fds-image-publishing-role-376210053828-us-east-1"
+        }
+      }
+    }
+  }
+}

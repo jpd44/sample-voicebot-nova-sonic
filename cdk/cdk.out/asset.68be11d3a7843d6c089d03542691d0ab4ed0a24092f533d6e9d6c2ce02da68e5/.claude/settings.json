@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run build)",
+      "Bash(npm run lint)",
+      "Bash(aws sts get-caller-identity *)",
+      "Bash(aws sts get-caller-identity)",
+      "Bash(npx cdk synth *)",
+      "Bash(npx cdk synth)",
+      "Bash(npx cdk diff *)",
+      "Bash(npx cdk diff)",
+      "Bash(aws organizations describe-organization *)",
+      "Bash(aws organizations describe-organization)"
+    ]
+  }
+}

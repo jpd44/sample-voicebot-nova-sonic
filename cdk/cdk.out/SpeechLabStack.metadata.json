@@ -1,0 +1,634 @@
+{
+  "/SpeechLabStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Custom::VpcRestrictDefaultSGCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/SpeechLabStack/AWSCloudFrontPartitionHostedZoneIdMap": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AWSCloudFrontPartitionHostedZoneIdMap"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:202:9)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/AppUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AppUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:231:9)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/CloudFrontDomain": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CloudFrontDomain"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:232:9)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/AlbDnsName": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AlbDnsName"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:233:9)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/EcrRepoNote": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "EcrRepoNote"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:234:9)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Certificate/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Certificate4E7ABB08"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Certificate2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:40:29)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Vpc8378EB38"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcIGWD7BA715C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcVPCGWBF912B6E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderRole26592FE0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Custom::VpcRestrictDefaultSGCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomVpcRestrictDefaultSGCustomResourceProviderHandlerDC833E5E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Cluster/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ClusterEB0386A7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Cluster2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:57:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/AppLogs/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AppLogsC5DF83A6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new LogGroup2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:62:26)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/TaskDef/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TaskDef54694570"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new FargateTaskDefinition2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:67:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LoadBalancerDNS": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLoadBalancerDNSEC5B149E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/ServiceURL": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceServiceURL250C0FB6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Distribution/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Distribution830FAC52"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Distribution2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:178:30)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/AliasRecord/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AliasRecord851000D2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ARecord2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:202:9)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1Subnet2BB74ED7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1RouteTable15C15F8E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1RouteTableAssociation4E83B6E4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet1DefaultRouteB88F9E93"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2SubnetE34B022A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2RouteTableC5A6DF77"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2RouteTableAssociationCCE257FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/publicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcpublicSubnet2DefaultRoute732F0BEB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Vpc/RestrictDefaultSecurityGroupCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VpcRestrictDefaultSecurityGroupCustomResourceC73DA2BE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:48:21)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/TaskDef/TaskRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TaskDefTaskRole1EDB4A67"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new FargateTaskDefinition2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:67:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/TaskDef/ExecutionRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TaskDefExecutionRoleB4775C97"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LB/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLBE9A1ADBC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/Service/Service": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Service9571FDD8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/TaskDef/TaskRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TaskDefTaskRoleDefaultPolicyA592CB18"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:77:26)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)",
+        "...node internals, ts-node..."
+      ]
+    }
+  ],
+  "/SpeechLabStack/TaskDef/ExecutionRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TaskDefExecutionRoleDefaultPolicy0DBB737A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LB/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLBSecurityGroupF7435A5C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LB/SecurityGroup/to SpeechLabStackServiceSecurityGroupCFA9AAFA:3000": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLBSecurityGrouptoSpeechLabStackServiceSecurityGroupCFA9AAFA300044AEC84D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LB/PublicListener/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLBPublicListener46709EAA"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LB/PublicRedirectListener/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLBPublicRedirectListenerF055B333"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/Service/SecurityGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceSecurityGroupEEA09B68"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)",
+        "<anonymous> (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/bin/speechlab.ts:8:1)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/Service/SecurityGroup/from SpeechLabStackServiceLBSecurityGroupAD99BC22:3000": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceSecurityGroupfromSpeechLabStackServiceLBSecurityGroupAD99BC223000AFD46DA2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/SpeechLabStack/Service/LB/PublicListener/ECSGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ServiceLBPublicListenerECSGroup0CC8688C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancedFargateService2 in aws-cdk-lib...",
+        "new SpeechLabStack (/Users/jpdixon/Dropbox/ReplPersonal/Developer/sample-voicebot-nova-sonic/cdk/lib/speechlab-stack.ts:128:25)"
+      ]
+    }
+  ]
+}

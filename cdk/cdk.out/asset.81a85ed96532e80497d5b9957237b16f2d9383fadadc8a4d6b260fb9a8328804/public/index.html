@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html data-theme="light">
+<head>
+    <title>Daily Deutsch Speech Lab</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="/nova-icon.png">
+    <link rel="stylesheet" href="/src/style.css">
+    <script>
+        // Apply saved theme before any rendering to avoid FOUC
+        (function() {
+            var saved = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', saved);
+        })();
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+    <!-- Login gate — visible until the user authenticates via Cognito -->
+    <div id="auth-gate" class="auth-gate hidden">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <span class="brand-mark" aria-hidden="true">DD</span>
+                <span class="auth-title">Daily Deutsch Speech Lab</span>
+            </div>
+            <p class="auth-subtitle">Sign in to start practicing.</p>
+            <form id="auth-form" class="auth-form">
+                <label class="auth-label" for="auth-email">Email</label>
+                <input type="email" id="auth-email" class="auth-input" autocomplete="email" required>
+                <label class="auth-label" for="auth-password">Password</label>
+                <input type="password" id="auth-password" class="auth-input" autocomplete="current-password" required>
+                <p id="auth-error" class="auth-error"></p>
+                <button id="auth-submit" type="submit" class="auth-submit">Sign in</button>
+            </form>
+            <p class="auth-footnote">Don't have an account? Sign up at <a href="https://daily-deutsch.com" target="_blank" rel="noopener">daily-deutsch.com</a> first.</p>
+        </div>
+    </div>
+
+    <div id="app">
+        <header class="app-header">
+            <h1 class="app-title">
+                <span class="brand-mark" aria-hidden="true">DD</span>
+                Daily Deutsch Speech Lab
+            </h1>
+            <div class="header-controls">
+                <span id="auth-user-info" class="auth-user-info hidden" title="Signed in"></span>
+                <button id="auth-signout" class="icon-btn auth-signout-btn hidden" aria-label="Sign out" title="Sign out">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                </button>
+                <div id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"></div>
+                <button id="feedback-toggle" class="icon-btn feedback-btn" aria-label="Feedback">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                    </svg>
+                    <span id="feedback-badge" class="feedback-badge hidden">0</span>
+                </button>
+                <button id="settings-toggle" class="icon-btn settings-btn" aria-label="Settings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <div id="settings-overlay" class="settings-overlay"></div>
+        <div id="feedback-overlay" class="settings-overlay"></div>
+        <div id="feedback-panel" class="settings-panel feedback-panel">
+            <div class="settings-header">
+                <h2>Analysis</h2>
+                <button id="feedback-close" class="close-btn">&times;</button>
+            </div>
+            <div class="settings-content">
+                <div id="feedback-empty" class="feedback-empty">
+                    <p>Once you start speaking German, corrections and patterns will appear here.</p>
+                </div>
+                <div id="feedback-summary" class="feedback-summary hidden">
+                    <h3>Patterns</h3>
+                    <div id="feedback-patterns" class="feedback-patterns"></div>
+                </div>
+                <div id="feedback-list" class="feedback-list"></div>
+            </div>
+        </div>
+        <div id="settings-panel" class="settings-panel">
+            <div class="settings-header">
+                <h2>Configuration</h2>
+                <button id="settings-close" class="close-btn">&times;</button>
+            </div>
+            <div class="settings-content">
+
+                <details class="settings-accordion" open>
+                    <summary>Language</summary>
+                    <div class="accordion-content">
+                        <div class="custom-select has-description" data-id="language" data-value="de">
+                            <div class="custom-select-trigger">
+                                <span class="custom-select-value">Deutsch</span>
+                                <div class="custom-select-arrow">
+                                    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-select-option selected" data-value="de">
+                                    <span class="option-label">Deutsch</span>
+                                    <span class="option-description">German (Goethe-Zertifikat anchored)</span>
+                                </div>
+                                <div class="custom-select-option" data-value="pt">
+                                    <span class="option-label">Português (Brasil)</span>
+                                    <span class="option-description">Brazilian Portuguese (CELPE-Bras)</span>
+                                </div>
+                                <div class="custom-select-option" data-value="es">
+                                    <span class="option-label">Español (LatAm)</span>
+                                    <span class="option-description">Latin American Spanish (DELE)</span>
+                                </div>
+                                <div class="custom-select-option" data-value="it">
+                                    <span class="option-label">Italiano</span>
+                                    <span class="option-description">Standard Italian (CILS/CELI)</span>
+                                </div>
+                                <div class="custom-select-option" data-value="fr">
+                                    <span class="option-label">Français</span>
+                                    <span class="option-description">Metropolitan French (DELF/DALF)</span>
+                                </div>
+                                <div class="custom-select-option" data-value="ru">
+                                    <span class="option-label">Русский</span>
+                                    <span class="option-description">Russian (TORFL / ТРКИ)</span>
+                                </div>
+                                <div class="custom-select-option" data-value="tr">
+                                    <span class="option-label">Türkçe</span>
+                                    <span class="option-description">Standard Turkish (TYS)</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Persona</summary>
+                    <div class="accordion-content">
+                        <div class="setting-item">
+                            <label class="settings-label">CEFR level</label>
+                            <div class="custom-select has-description" data-id="prompt-preset" data-value="a1">
+                                <div class="custom-select-trigger">
+                                    <span class="custom-select-value">A1 — Anfänger</span>
+                                    <div class="custom-select-arrow">
+                                        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                </div>
+                                <div class="custom-select-options">
+                                    <div class="custom-select-option selected" data-value="a1">
+                                        <span class="option-label">A1 — Anfänger</span>
+                                        <span class="option-description">Beginner: greetings, family, simple present tense</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="a2">
+                                        <span class="option-label">A2 — Grundlegend</span>
+                                        <span class="option-description">Elementary: Perfekt, Dativ, separable verbs</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="b1">
+                                        <span class="option-label">B1 — Selbstständig</span>
+                                        <span class="option-description">Intermediate: Konjunktiv II, Relativsätze, opinions</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="b2">
+                                        <span class="option-label">B2 — Fortgeschritten</span>
+                                        <span class="option-description">Upper intermediate: Passiv, idioms, debate</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="c1">
+                                        <span class="option-label">C1 — Fachkundig</span>
+                                        <span class="option-description">Advanced: Konjunktiv I, full register, nuance</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="default">
+                                        <span class="option-label">Friendly Chat</span>
+                                        <span class="option-description">General-purpose casual assistant (non-CEFR)</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="custom">
+                                        <span class="option-label">Custom</span>
+                                        <span class="option-description">Use the prompt you've typed below</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <textarea id="system-prompt" class="settings-textarea" placeholder="The selected persona's prompt appears here. Edit to customize."></textarea>
+                        <div class="setting-item" style="margin-top: 0.75rem;">
+                            <label class="toggle-row">
+                                <span class="settings-label" style="margin: 0;">Bot greets first when I tap the mic</span>
+                                <input type="checkbox" id="bot-greets-first">
+                            </label>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Scenario</summary>
+                    <div class="accordion-content">
+                        <p class="setting-hint" style="margin-bottom: 12px;">Pick a real-world situation to practice. The scenario adapts to the chosen CEFR persona.</p>
+                        <div class="custom-select" data-id="scenario" data-value="none">
+                            <div class="custom-select-trigger">
+                                <span class="custom-select-value">Free conversation</span>
+                                <div class="custom-select-arrow">
+                                    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="custom-select-options">
+                                <div class="custom-select-option selected" data-value="none">Free conversation</div>
+                                <div class="custom-select-option" data-value="introduce_yourself">Sich vorstellen — Introduce yourself</div>
+                                <div class="custom-select-option" data-value="order_coffee">Im Café bestellen — Order at a café</div>
+                                <div class="custom-select-option" data-value="ask_directions">Nach dem Weg fragen — Ask for directions</div>
+                                <div class="custom-select-option" data-value="grocery_shopping">Im Supermarkt einkaufen — Grocery shopping</div>
+                                <div class="custom-select-option" data-value="describe_family">Familie beschreiben — Describe your family</div>
+                                <div class="custom-select-option" data-value="weekend_story">Über das Wochenende erzählen — Tell about your weekend</div>
+                                <div class="custom-select-option" data-value="doctor_visit">Beim Arzt — Doctor visit</div>
+                                <div class="custom-select-option" data-value="book_hotel">Hotel buchen / einchecken — Book or check in to a hotel</div>
+                                <div class="custom-select-option" data-value="apartment_hunt">Wohnungssuche — Apartment hunting</div>
+                                <div class="custom-select-option" data-value="make_plans">Verabredung treffen — Make plans</div>
+                                <div class="custom-select-option" data-value="discuss_film">Über einen Film erzählen — Talk about a film</div>
+                                <div class="custom-select-option" data-value="complaint">Höflich reklamieren — Politely complain</div>
+                                <div class="custom-select-option" data-value="advice">Ratschläge geben — Give advice</div>
+                                <div class="custom-select-option" data-value="job_interview">Vorstellungsgespräch — Job interview</div>
+                                <div class="custom-select-option" data-value="travel_problem">Reisepanne lösen — Solve a travel problem</div>
+                                <div class="custom-select-option" data-value="debate_topic">Über ein Thema diskutieren — Debate a current topic</div>
+                                <div class="custom-select-option" data-value="describe_chart">Grafik beschreiben — Describe a chart</div>
+                                <div class="custom-select-option" data-value="workplace_conflict">Konfliktgespräch — Workplace conflict</div>
+                                <div class="custom-select-option" data-value="literary_analysis">Literarischer Text — Analyze a literary text</div>
+                                <div class="custom-select-option" data-value="ethical_debate">Ethisches Dilemma — Ethical debate</div>
+                                <div class="custom-select-option" data-value="negotiation">Verhandlung — Negotiation</div>
+                            </div>
+                        </div>
+                        <div class="setting-item" style="margin-top: 0.75rem;">
+                            <label class="toggle-row">
+                                <span class="settings-label" style="margin: 0;">Play background ambience for scenarios</span>
+                                <input type="checkbox" id="ambient-enabled" checked>
+                            </label>
+                            <p class="setting-hint">Quiet ambient noise (e.g. cafe chatter) for scenarios that have it.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Model Capabilities</summary>
+                    <div class="accordion-content">
+                        <div class="setting-item">
+                            <label class="settings-label">Voice</label>
+                            <div class="custom-select" data-id="voice-type" data-value="tiffany">
+                                <div class="custom-select-trigger">
+                                    <span class="custom-select-value"><svg class="gender-icon female" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="7" r="4"/><path d="M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z"/></svg> Tiffany</span>
+                                    <div class="custom-select-arrow">
+                                        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                </div>
+                                <div class="custom-select-options">
+                                    <div class="custom-select-option selected" data-value="tiffany"><svg class="gender-icon female" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="7" r="4"/><path d="M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z"/></svg> Tiffany</div>
+                                    <div class="custom-select-option" data-value="matthew"><svg class="gender-icon male" viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><circle cx="12" cy="7" r="4"/><path d="M12 14c-4 0-8 2-8 4v2h16v-2c0-2-4-4-8-4z"/></svg> Matthew</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <label class="settings-label">Response timing</label>
+                            <div class="custom-select has-description" data-id="response-timing" data-value="medium">
+                                <div class="custom-select-trigger">
+                                    <span class="custom-select-value">Medium</span>
+                                    <div class="custom-select-arrow">
+                                        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                </div>
+                                <div class="custom-select-options">
+                                    <div class="custom-select-option" data-value="fast">
+                                        <span class="option-label">Fast</span>
+                                        <span class="option-description">Quick replies after brief pauses (~1.5s)</span>
+                                    </div>
+                                    <div class="custom-select-option selected" data-value="medium">
+                                        <span class="option-label">Medium</span>
+                                        <span class="option-description">Natural pacing for conversations (~1.75s)</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="slow">
+                                        <span class="option-label">Slow</span>
+                                        <span class="option-description">Longer pauses for thoughtful responses (~2s)</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <label class="settings-label">Output audio quality</label>
+                            <div class="custom-select has-description" data-id="output-sample-rate" data-value="24000">
+                                <div class="custom-select-trigger">
+                                    <span class="custom-select-value">24 kHz</span>
+                                    <div class="custom-select-arrow">
+                                        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                </div>
+                                <div class="custom-select-options">
+                                    <div class="custom-select-option" data-value="8000">
+                                        <span class="option-label">8 kHz</span>
+                                        <span class="option-description">Low bandwidth, telephony quality</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="16000">
+                                        <span class="option-label">16 kHz</span>
+                                        <span class="option-description">Standard quality, balanced</span>
+                                    </div>
+                                    <div class="custom-select-option selected" data-value="24000">
+                                        <span class="option-label">24 kHz</span>
+                                        <span class="option-description">High quality audio output</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Inference settings</summary>
+                    <div class="accordion-content">
+                        <div class="setting-item slider-item">
+                            <div class="slider-header">
+                                <label class="settings-label">Temperature</label>
+                                <input type="number" id="temperature-value" class="slider-value-input" value="1" min="0" max="1" step="0.1">
+                            </div>
+                            <input type="range" id="temperature" class="settings-slider" min="0" max="1" step="0.1" value="1">
+                        </div>
+                        <div class="setting-item slider-item">
+                            <div class="slider-header">
+                                <label class="settings-label">Top P</label>
+                                <input type="number" id="top-p-value" class="slider-value-input" value="0.9" min="0" max="1" step="0.1">
+                            </div>
+                            <input type="range" id="top-p" class="settings-slider" min="0" max="1" step="0.1" value="0.9">
+                        </div>
+                        <div class="setting-item slider-item">
+                            <div class="slider-header">
+                                <label class="settings-label">Response length</label>
+                                <input type="number" id="max-tokens-value" class="slider-value-input" value="2048" min="256" max="4096" step="256">
+                            </div>
+                            <input type="range" id="max-tokens" class="settings-slider" min="256" max="4096" step="256" value="2048">
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Audio Settings</summary>
+                    <div class="accordion-content">
+                        <div class="setting-item">
+                            <label class="toggle-row">
+                                <span class="settings-label" style="margin: 0;">Push to talk</span>
+                                <input type="checkbox" id="push-to-talk">
+                            </label>
+                            <p class="setting-hint">Only stream audio while you hold the mic button (or spacebar). Cuts Nova Sonic costs significantly.</p>
+                        </div>
+                        <div class="setting-item slider-item">
+                            <div class="slider-header">
+                                <label class="settings-label">Initial buffer (ms)</label>
+                                <input type="number" id="audio-buffer-value" class="slider-value-input" value="200" min="0" max="1000" step="100">
+                            </div>
+                            <input type="range" id="audio-buffer" class="settings-slider" min="0" max="1000" step="100" value="200">
+                            <p class="setting-hint">Lower = faster response, higher = smoother playback</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Corrections</summary>
+                    <div class="accordion-content">
+                        <div class="setting-item">
+                            <label class="toggle-row">
+                                <span class="settings-label" style="margin: 0;">Show inline corrections</span>
+                                <input type="checkbox" id="corrections-show" checked>
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="settings-label">Strictness</label>
+                            <div class="custom-select has-description" data-id="corrections-level" data-value="all">
+                                <div class="custom-select-trigger">
+                                    <span class="custom-select-value">All errors</span>
+                                    <div class="custom-select-arrow">
+                                        <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                    </div>
+                                </div>
+                                <div class="custom-select-options">
+                                    <div class="custom-select-option" data-value="off">
+                                        <span class="option-label">Off</span>
+                                        <span class="option-description">No analysis</span>
+                                    </div>
+                                    <div class="custom-select-option" data-value="major">
+                                        <span class="option-label">Major only</span>
+                                        <span class="option-description">Grammar + vocabulary only</span>
+                                    </div>
+                                    <div class="custom-select-option selected" data-value="all">
+                                        <span class="option-label">All errors</span>
+                                        <span class="option-description">Also usage, register, pronunciation</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="setting-item">
+                            <label class="toggle-row">
+                                <span class="settings-label" style="margin: 0;">Bot speaks the correction</span>
+                                <input type="checkbox" id="corrections-spoken">
+                            </label>
+                            <p class="setting-hint">When on, the bot will briefly correct major errors aloud before responding.</p>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Your profile</summary>
+                    <div class="accordion-content">
+                        <p class="setting-hint" style="margin-bottom: 12px;">What the bot has learned about you across sessions. Stored locally on this device.</p>
+                        <div id="learner-profile-block"></div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>Tools</summary>
+                    <div class="accordion-content">
+                        <p class="setting-hint" style="margin-bottom: 12px;">Enable or disable tools for the assistant to use during conversations.</p>
+                        <div id="tools-list" class="tools-list">
+                            <div class="tools-loading">Loading tools...</div>
+                        </div>
+                    </div>
+                </details>
+
+                <details class="settings-accordion">
+                    <summary>AWS Region</summary>
+                    <div class="accordion-content">
+                        <p class="setting-hint" style="margin-bottom: 12px;">Latency is measured at app load. Pick the lowest-latency region for the smoothest conversation.</p>
+                        <div class="custom-select" data-id="aws-region" data-value="">
+                            <div class="custom-select-trigger">
+                                <span class="custom-select-value">Measuring latency…</span>
+                                <div class="custom-select-arrow">
+                                    <svg width="12" height="12" viewBox="0 0 12 12"><path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+                                </div>
+                            </div>
+                            <div class="custom-select-options"></div>
+                        </div>
+                        <button id="region-latency-refresh" class="latency-refresh-btn" type="button">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="23 4 23 10 17 10"></polyline>
+                                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+                            </svg>
+                            <span class="latency-refresh-label">Re-measure latency</span>
+                        </button>
+                    </div>
+                </details>
+            </div>
+        </div>
+
+        <aside id="scenario-panel" class="scenario-panel-fixed hidden"></aside>
+
+        <div id="usage-banner" class="usage-banner hidden">
+            <span id="usage-text">Daily usage</span>
+            <div class="usage-bar"><div id="usage-bar-fill" class="usage-bar-fill"></div></div>
+        </div>
+
+        <main class="main-content">
+            <div class="voice-container">
+                <canvas id="waveform-canvas" class="waveform-canvas"></canvas>
+                <div class="button-wrapper">
+                    <canvas id="ring-canvas" class="ring-canvas"></canvas>
+                    <button id="voice-btn" class="voice-btn" aria-label="Start voice">
+                    <svg class="mic-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                        <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                    </svg>
+                    <svg class="stop-icon hidden" viewBox="0 0 24 24" fill="currentColor">
+                        <rect x="6" y="6" width="12" height="12" rx="2"/>
+                    </svg>
+                    </button>
+                </div>
+            </div>
+
+            <p class="voice-hint hidden">Tap to start conversation</p>
+            <div id="chat-container" class="chat-container"></div>
+            
+            <!-- Typing Window -->
+            <div id="typing-window" class="typing-window hidden">
+                <div class="typing-input-wrapper">
+                    <textarea id="text-input" class="text-input" placeholder="Type your message..." rows="1"></textarea>
+                    <button id="send-text-btn" class="send-text-btn" aria-label="Send message">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 2L11 13"></path>
+                            <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                        </svg>
+                    </button>
+                    <button id="hide-typing-btn" class="hide-typing-btn" aria-label="Hide typing window">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                            <line x1="6" y1="8" x2="6.01" y2="8"></line>
+                            <line x1="10" y1="8" x2="10.01" y2="8"></line>
+                            <line x1="14" y1="8" x2="14.01" y2="8"></line>
+                            <line x1="18" y1="8" x2="18.01" y2="8"></line>
+                            <line x1="6" y1="12" x2="6.01" y2="12"></line>
+                            <line x1="10" y1="12" x2="10.01" y2="12"></line>
+                            <line x1="14" y1="12" x2="14.01" y2="12"></line>
+                            <line x1="18" y1="12" x2="18.01" y2="12"></line>
+                            <line x1="8" y1="16" x2="16" y2="16"></line>
+                            <line x1="2" y1="2" x2="22" y2="22" stroke-width="2.5"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Keyboard Toggle Button -->
+            <button id="keyboard-toggle" class="keyboard-toggle" aria-label="Toggle typing mode">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect>
+                    <line x1="6" y1="8" x2="6" y2="8"></line>
+                    <line x1="10" y1="8" x2="10" y2="8"></line>
+                    <line x1="14" y1="8" x2="14" y2="8"></line>
+                    <line x1="18" y1="8" x2="18" y2="8"></line>
+                    <line x1="6" y1="12" x2="6" y2="12"></line>
+                    <line x1="10" y1="12" x2="10" y2="12"></line>
+                    <line x1="14" y1="12" x2="14" y2="12"></line>
+                    <line x1="18" y1="12" x2="18" y2="12"></line>
+                    <line x1="8" y1="16" x2="16" y2="16"></line>
+                </svg>
+            </button>
+        </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="/src/typing.js"></script>
+</body>
+</html>
